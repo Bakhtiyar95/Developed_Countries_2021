@@ -1,0 +1,723 @@
+
+
+Create user Developed_Countries_2021 identified by data_2021 ;
+
+Grant dba to Developed_Countries_2021;
+
+Grant connect to Developed_Countries_2021 ;
+
+Grant create session to Developed_Countries_2021 ;
+
+Grant create table to Developed_Countries_2021 ;
+
+Grant all privileges to Developed_Countries_2021 ;
+
+Grant select any table to Developed_Countries_2021 ;
+
+
+
+
+
+Create table REGIONS
+(
+region_id number constraint region_id_d primary key,
+region_name varchar2(30)
+);
+
+
+
+insert into REGIONS
+values (1,'Europe');
+
+insert into REGIONS
+values (2,'Asia');
+
+insert into REGIONS
+values (3,'Africa');
+
+insert into REGIONS
+values (4,'North America');
+
+insert into REGIONS
+values (5,'South America');
+
+insert into REGIONS
+values (6,'Australia and Oceania');
+
+
+
+
+
+Create table COUNTRIES
+(
+country_id char(2) constraint country_id_d primary key,
+country_name varchar2(40) unique,
+region_id number constraint region_id_s references regions(region_id)
+);
+
+
+
+insert into COUNTRIES
+values ('GM','Germany',1);
+
+insert into COUNTRIES
+values ('AU','Austria',1);
+
+insert into COUNTRIES
+values ('BE','Belgium',1);
+
+insert into COUNTRIES
+values ('UK','United Kingdom',1);
+
+insert into COUNTRIES
+values ('DM','Denmark',1);
+
+insert into COUNTRIES
+values ('ES','Estonia',1);
+
+insert into COUNTRIES
+values ('FL','Finland',1);
+
+insert into COUNTRIES
+values ('FR','France',1);
+
+insert into COUNTRIES
+values ('CZ','Czech Republic',1);
+
+insert into COUNTRIES
+values ('IR','Ireland',1);
+
+insert into COUNTRIES
+values ('IC','Iceland',1);
+
+insert into COUNTRIES
+values ('SP','Spain',1);
+
+insert into COUNTRIES
+values ('SW','Sweden',1);
+
+insert into COUNTRIES
+values ('SZ','Switzerland',1);
+
+insert into COUNTRIES
+values ('IT','Italy',1);
+
+insert into COUNTRIES
+values ('LB','Luxembourg',1);
+
+insert into COUNTRIES
+values ('MT','Malta',1);
+
+insert into COUNTRIES
+values ('NL','Netherlands',1);
+
+insert into COUNTRIES
+values ('NW','Norway',1);
+
+insert into COUNTRIES
+values ('PL','Poland',1);
+
+insert into COUNTRIES
+values ('PO','Portugal',1);
+
+insert into COUNTRIES
+values ('SV','Slovakia',1);
+
+insert into COUNTRIES
+values ('SL','Slovenia',1);
+
+insert into COUNTRIES
+values ('GR','Greece',1);
+
+insert into COUNTRIES
+values ('SK','South Korea',2);
+
+insert into COUNTRIES
+values ('HK','Honkong',2);
+
+insert into COUNTRIES
+values ('IS','Israel',2);
+
+insert into COUNTRIES
+values ('SG','Singapore',2);
+
+insert into COUNTRIES
+values ('JP','Japan',2);
+
+insert into COUNTRIES
+values ('CH','China',2);
+
+insert into COUNTRIES
+values ('SA','South Africa',3);
+
+insert into COUNTRIES
+values ('US','United States of America',4);
+
+insert into COUNTRIES
+values ('CA','Canada',4);
+
+insert into COUNTRIES
+values ('AT','Australia',6);
+
+insert into COUNTRIES
+values ('NZ','New Zealand',6);
+
+
+
+
+
+Create table HDI
+(
+country_name varchar2(40) references countries(country_name),
+HDI_index number constraint HDI_in not null check(HDI_index <=1),  
+population number unique
+);
+
+
+
+insert into HDI
+values ('Norway',0.954,5465630);
+
+insert into HDI
+values ('Switzerland',0.946,8715494);
+
+insert into HDI
+values ('Ireland',0.942,4982907);
+
+insert into HDI
+values ('Honkong',0.939,7552810);
+
+insert into HDI
+values ('Germany',0.939,83900473);
+
+insert into HDI
+values ('Iceland',0.938,343353);
+
+insert into HDI
+values ('Australia',0.938,25788215);
+
+insert into HDI
+values ('Sweden',0.937,10160169);
+
+insert into HDI
+values ('Singapore',0.935,5896686);
+
+insert into HDI
+values ('Netherlands',0.933,17173099);
+
+insert into HDI
+values ('Denmark',0.930,5813298);
+
+insert into HDI
+values ('Finland',0.925,5548360);
+
+insert into HDI
+values ('Canada',0.922,38067903);
+
+insert into HDI
+values ('New Zealand',0.921,4860643);
+
+insert into HDI
+values ('United Kingdom',0.920,68207116);
+
+insert into HDI
+values ('United States of America',0.920,332915073);
+
+insert into HDI
+values ('Belgium',0.919,11632326);
+
+insert into HDI
+values ('Japan',0.915,126050804);
+
+insert into HDI
+values ('Austria',0.914,9043070);
+
+insert into HDI
+values ('Luxembourg',0.909,634814);
+
+insert into HDI
+values ('Israel',0.906,8789774);
+
+insert into HDI
+values ('South Korea',0.906,51305186);
+
+insert into HDI
+values('Slovenia',0.902,2078724);
+
+insert into HDI
+values ('Spain',0.893,46745216);
+
+insert into HDI
+values ('Czech Republic',0.891,10724555);
+
+insert into HDI
+values ('France',0.891,65426179);
+
+insert into HDI
+values ('Malta',0.885,442784);
+
+insert into HDI
+values ('Italy',0.883,60367477);
+
+insert into HDI
+values ('Estonia',0.882,1325185);
+
+insert into HDI
+values ('Greece',0.872,10370744);
+
+insert into HDI
+values ('Poland',0.872,37797005);
+
+insert into HDI
+values ('Slovakia',0.857,5460721);
+
+insert into HDI
+values ('Portugal',0.850,10167925);
+
+insert into HDI
+values ('South Africa',0.705,60041994);
+
+insert into HDI
+values ('China',0.758,1444216107);
+
+
+
+
+
+Create table HEALTH
+(
+healthcare_rank number constraint healthcare_r primary key,
+country_id char(2) references countries(country_id),
+healthcare_index number not null check(healthcare_index <= 100)
+);
+
+
+
+insert into HEALTH 
+values (1,'SK',82.36);
+
+insert into HEALTH 
+values (2,'FR',80.56);
+
+insert into HEALTH 
+values (3,'JP',80.21);
+
+insert into HEALTH 
+values (4,'DM',79.79);
+
+insert into HEALTH 
+values (5,'SP',78.85);
+
+insert into HEALTH 
+values (6,'AT',77.86);
+
+insert into HEALTH 
+values (7,'AU',76.98);
+
+insert into HEALTH 
+values (8,'FL',76.19);
+
+insert into HEALTH 
+values (9,'NW',75.59);
+
+insert into HEALTH 
+values (10,'CZ',75.39);
+
+insert into HEALTH 
+values (11,'BE',75.37);
+
+insert into HEALTH 
+values (12,'NL',75.28);
+
+insert into HEALTH 
+values (13,'UK',75.11);
+
+insert into HEALTH 
+values (14,'SZ',74.08);
+
+insert into HEALTH 
+values (15,'IS',73.93);
+
+insert into HEALTH 
+values (16,'NZ',73.59);
+
+insert into HEALTH 
+values (17,'GM',73.49);
+
+insert into HEALTH 
+values (18,'LB',72.92);
+
+insert into HEALTH 
+values (19,'ES',72.68);
+
+insert into HEALTH 
+values (20,'PO',71.85);
+
+insert into HEALTH 
+values (21,'CA',71.69);
+
+insert into HEALTH 
+values (22,'SG',71.23);
+
+insert into HEALTH 
+values (23,'US',69.11);
+
+insert into HEALTH 
+values (24,'SW',68.82);
+
+insert into HEALTH 
+values (25,'IT',66.99);
+
+insert into HEALTH 
+values (26,'HK',66.37);
+
+insert into HEALTH 
+values (27,'CH',66.16);
+
+insert into HEALTH 
+values (28,'IC',65.85);
+
+insert into HEALTH 
+values (29,'SL',65.19);
+
+insert into HEALTH 
+values (30,'SA',63.94);
+
+insert into HEALTH 
+values (31,'SV',60.19);
+
+insert into HEALTH 
+values (32,'MT',58.58);
+
+insert into HEALTH 
+values (33,'GR',57.09);
+
+insert into HEALTH 
+values (34,'PL',56.15);
+
+insert into HEALTH 
+values (35,'IR',52.82);
+
+
+
+
+
+Create table LIFE_EXPECTANCY
+(
+males number not null, 
+females number,
+healthcare_rank number references health(healthcare_rank)
+);
+
+
+
+insert into LIFE_EXPECTANCY
+values (82.2,88.1,26);
+
+insert into LIFE_EXPECTANCY
+values (81.9,85.6,14);
+
+insert into LIFE_EXPECTANCY
+values (81.4,87.5,3);
+
+insert into LIFE_EXPECTANCY
+values (81.4 ,85.7,22);
+
+insert into LIFE_EXPECTANCY
+values (81.3,84.7,24);
+
+insert into LIFE_EXPECTANCY
+values (81.2,84.7,9);
+
+insert into LIFE_EXPECTANCY
+values (81.1,85.4,25);
+
+insert into LIFE_EXPECTANCY
+values (81.0,84.7,15);
+
+insert into LIFE_EXPECTANCY
+values (80.9,86.2,5);
+
+insert into LIFE_EXPECTANCY
+values (80.9,85.0,6);
+
+insert into LIFE_EXPECTANCY
+values (80.6,84.7,32);
+
+insert into LIFE_EXPECTANCY
+values (80.5,83.6,12);
+
+insert into LIFE_EXPECTANCY
+values (80.4,84.3,35);
+
+insert into LIFE_EXPECTANCY
+values (80.3,84.7,18);
+
+insert into LIFE_EXPECTANCY
+values (80.3,86.3,1);
+
+insert into LIFE_EXPECTANCY
+values (80.0,84.2,21);
+
+insert into LIFE_EXPECTANCY
+values (80.0,83.5,16);
+
+insert into LIFE_EXPECTANCY
+values (79.7,85.6,2);
+
+insert into LIFE_EXPECTANCY
+values (79.6 ,84.0,11);
+
+insert into LIFE_EXPECTANCY
+values (79.5,84.2,7);
+
+insert into LIFE_EXPECTANCY
+values (79.5,84.5,33);
+
+insert into LIFE_EXPECTANCY
+values (79.4,83.1,13);
+
+insert into LIFE_EXPECTANCY
+values (79.3,83.2,4);
+
+insert into LIFE_EXPECTANCY
+values (79.2,84.5,8);
+
+insert into LIFE_EXPECTANCY
+values (78.6,83.4,17);
+
+insert into LIFE_EXPECTANCY
+values (78.5,84.2,29);
+
+insert into LIFE_EXPECTANCY
+values (78.0,83.5,20);
+
+insert into LIFE_EXPECTANCY
+values (76.3,81.4,23);
+
+insert into LIFE_EXPECTANCY
+values (76.3,82.1,10);
+
+insert into LIFE_EXPECTANCY
+values (74.8,79.2,27);
+
+insert into LIFE_EXPECTANCY
+values (74.4 ,82.8,19);
+
+insert into LIFE_EXPECTANCY
+values (74.3,80.8,31);
+
+insert into LIFE_EXPECTANCY
+values (74.1,81.8,34);
+
+insert into LIFE_EXPECTANCY
+values (60.7,67.7,30);
+
+insert into LIFE_EXPECTANCY
+values (79.3,83.2,4);
+
+
+
+
+
+Create table EDUCATION 
+(
+country_id char(2) references countries(country_id),
+edu_rank number constraint edu_rn primary key 
+);
+
+
+
+insert into EDUCATION
+values ('US',1);
+
+insert into EDUCATION
+values ('UK',2);
+
+insert into EDUCATION
+values ('GM',3);
+
+insert into EDUCATION
+values ('CA',4);
+
+insert into EDUCATION
+values ('FR',5);
+
+insert into EDUCATION
+values ('SZ',6);
+
+insert into EDUCATION
+values ('JP',7);
+
+insert into EDUCATION
+values ('AT',8);
+
+insert into EDUCATION
+values ('SW',9);
+
+insert into EDUCATION
+values ('NL',10);
+
+insert into EDUCATION
+values ('NZ',11);
+
+insert into EDUCATION
+values ('DM',12);
+
+insert into EDUCATION
+values ('NW',13);
+
+insert into EDUCATION
+values ('IT',14);
+
+insert into EDUCATION
+values ('FL',15);
+
+insert into EDUCATION
+values ('AU',16);
+
+insert into EDUCATION
+values ('SP',17);
+
+insert into EDUCATION
+values ('BE',18);
+
+insert into EDUCATION
+values ('SK',19);
+
+insert into EDUCATION
+values ('IR',20);
+
+insert into EDUCATION
+values ('SG',21);
+
+insert into EDUCATION
+values ('CH',22);
+
+insert into EDUCATION
+values ('IS',23);
+
+insert into EDUCATION
+values ('PO',24);
+
+insert into EDUCATION
+values ('PL',25);
+
+insert into EDUCATION
+values ('GR',26);
+
+insert into EDUCATION
+values ('SA',27);
+
+insert into EDUCATION
+values ('ES',28);
+
+insert into EDUCATION
+values ('SV',29);
+
+insert into EDUCATION
+values ('SL',30);
+
+
+
+
+
+create table GDP
+(
+country_name varchar2(40) references countries(country_name),
+gdp number primary key,
+gdp_amount varchar2(30),
+currency varchar2(10) 
+); 
+
+
+
+insert into GDP 
+values ('United States of America',21.4,'trillion','$');
+
+insert into GDP
+values ('United Kingdom',2.83,'trillion','$');
+
+insert into GDP 
+values ('Germany',3.86 ,'trillion','$');
+
+insert into GDP 
+values ('Canada',1.74,'trillion','$');
+
+insert into GDP 
+values ('France',2.72,'trillion','$');
+
+insert into GDP 
+values ('Switzerland',731,'billion','$');
+
+insert into GDP 
+values ('Japan',5.06,'trillion','$');
+
+insert into GDP 
+values ('Australia',1.40,'trillion','$');
+
+insert into GDP 
+values ('Sweden',531,'billion','$');
+
+insert into GDP 
+values ('Netherlands',907,'billion','$');
+
+insert into GDP 
+values ('New Zealand',209,'billion','$');
+
+insert into GDP 
+values ('Denmark',350,'billion','$');
+
+insert into GDP
+values ('Norway',406,'billion','$');
+
+insert into GDP 
+values ('Italy',2,'trillion','$');
+
+insert into GDP 
+values ('Finland',269,'billion','$');
+
+insert into GDP 
+values ('Austria',445,'billion','$');
+
+insert into GDP 
+values ('Spain',1.39,'trillion','$');
+
+insert into GDP 
+values ('Belgium',533,'billion','$');
+
+insert into GDP
+values ('South Korea',1.65,'trillion','$');
+
+insert into GDP 
+values ('Ireland',399,'billion','$');
+
+insert into GDP 
+values ('Singapore',374,'billion','$');
+
+insert into GDP 
+values ('China',14.3,'trillion','$');
+
+insert into GDP
+values ('Israel',395,'billion','$');
+
+insert into GDP 
+values ('Portugal',240,'billion','$');
+
+insert into GDP 
+values ('Poland',596,'billion','$');
+
+insert into GDP 
+values ('Greece',205,'billion','$');
+
+insert into GDP 
+values ('South Africa',351,'billion','$');
+
+insert into GDP 
+values ('Estonia',31.5,'billion','$');
+
+insert into GDP 
+values ('Slovakia',105,'billion','$');
+
+insert into GDP 
+values ('Slovenia',54.2,'billion','$');
