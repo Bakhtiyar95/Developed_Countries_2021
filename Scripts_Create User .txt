@@ -1,0 +1,19 @@
+
+
+
+Create user Developed_Countries_2021 identified by data_2021 ;
+
+Grant dba to Developed_Countries_2021;
+
+Grant connect to Developed_Countries_2021 ;
+
+Grant create session to Developed_Countries_2021 ;
+
+Grant create table to Developed_Countries_2021 ;
+
+Grant all privileges to Developed_Countries_2021 ;
+
+Grant select any table to Developed_Countries_2021 ;
+
+
+
