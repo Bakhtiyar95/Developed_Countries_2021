@@ -1,0 +1,61 @@
+
+
+Create table REGIONS
+(
+region_id number constraint region_id_d primary key,
+region_name varchar2(30)
+);
+
+
+
+Create table COUNTRIES
+(
+country_id char(2) constraint country_id_d primary key,
+country_name varchar2(40) unique,
+region_id number constraint region_id_s references regions(region_id)
+);
+
+
+
+Create table HDI
+(
+country_name varchar2(40) references countries(country_name),
+HDI_index number constraint HDI_in not null check(HDI_index <=1),  
+population number unique
+);
+
+
+
+Create table HEALTH
+(
+healthcare_rank number constraint healthcare_r primary key,
+country_id char(2) references countries(country_id),
+healthcare_index number not null check(healthcare_index <= 100)
+);
+
+
+
+Create table LIFE_EXPECTANCY
+(
+males number not null, 
+females number,
+healthcare_rank number references health(healthcare_rank)
+);
+
+
+
+Create table EDUCATION 
+(
+country_id char(2) references countries(country_id),
+edu_rank number constraint edu_rn primary key 
+);
+
+
+
+create table GDP
+(
+country_name varchar2(40) references countries(country_name),
+gdp number primary key,
+gdp_amount varchar2(30),
+currency varchar2(10) 
+); 
